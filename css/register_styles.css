@@ -1,0 +1,66 @@
+html, body {
+    margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+div#login {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	overflow: hidden;
+	background: #b8c783;	
+}
+
+div#form {
+	margin-top: 50px; 
+}
+
+p#easy_chat {
+	font-size: 70px;
+	font-family: 'Pacifico';
+	color: #fffecd;
+}
+
+div#register {
+	padding-bottom: 35px;
+}
+
+p.name_password {
+	font-family: 'Montserrat';
+	color: #635960;
+
+}
+
+input.login {
+	width: 300px;
+	height: 30px;
+	background: #fffecd;
+	border: none;
+	font-family: 'Montserrat';
+	color: #635960;
+	font-size: 17px;
+	padding-left: 10px;
+}
+
+div#shadow {
+	width: 312px;
+	height: 200px;
+	background: linear-gradient(-5deg, #b8c783, rgba(0,0,0,0.06));
+	transform: matrix(1,-0.13,0.5,1.2,50,0);
+}
+
+input#submit {
+	width: 312px;
+	height: 40px;
+	position: relative;
+	background: #635960;
+	color: #fffecd;
+	font-family: 'Montserrat';
+	font-size: 20px;
+	border: none;
+	z-index: 1;
+}
+
