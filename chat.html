@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/chat_styles.css">
+	<link rel="stylesheet" type="text/css" href="css/header_styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="ajax/message.js" ></script>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+<body>
+	<header>
+		<ul>
+			<li id="first"></li>
+			<li id="second"></li>
+			<li id="third"></li>
+			<li id="fourth"></li>
+			<li id="fifth"></li>
+			<li id="first"></li>
+			<li id="second"></li>
+			<li id="third"></li>
+			<li id="fourth"></li>	
+			<li id="fifth"></li>
+		</ul>
+	</header>
+	<div id="chat">
+		<div id="textfield">		
+			<p id="easy_chat">Easy Chat</p>
+			<div id="inputs">
+			<div class="scroller">
+					<table id="messages">
+						<tr class="mess_hide">
+							<td class="time"></td>
+							<td class="name"></td>
+							<td class="message"></td>
+						</tr>
+					</table>
+				</div>
+				<form method="POST" id="easyForm">
+					<input type="text" name="text" id="text">
+					<input type="submit" value="Send" id="submit">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
