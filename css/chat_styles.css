@@ -16,6 +16,20 @@ div#chat {
 	background: #b8c783;
 }
 
+.logout {
+    border: none;
+    background: #5F9EA0;
+    font-family: 'Montserrat';
+    text-align: center;
+    width: 10%;
+    height: 25px;
+}
+
+.logout:hover {
+	color: #C0C0C0;
+	background: #FFF8DC;
+}
+
 div#textfield {
 	display: flex;
 	flex-flow: column nowrap;
