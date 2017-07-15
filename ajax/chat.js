@@ -8,7 +8,7 @@ $(document).ready(function(){
 				user:name
 			},
 			success: function(a) {
-				alert(a);
+				console.log(a);
 			}
 		});
 		return	false;
