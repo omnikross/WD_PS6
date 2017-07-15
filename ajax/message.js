@@ -1,26 +1,40 @@
 $(document).ready(function(){
+	function smile(mess){
+		var smile = ":)";
+		var graficSmile = "<img src = './image/Smile.png' alt='Smile' align='middle'>";
+		var string_with_replaced_smile =  mess.replace(smile, graficSmile);
+		var sad = ":("
+		var graficSad = "<img src = './image/Sad.png' alt='Smile' align='middle'>";
+		var string_with_replaced_smile_and_sad = string_with_replaced_smile.replace(sad, graficSad);
+		return string_with_replaced_smile_and_sad;
+	}
 	$.getJSON('data/messages.json', callback);
+	var exists = [];
 	function callback(respond) {
 		setTimeout(function tick() {
+			var timeNow = Date.now();
 			for (var i = 0; i < respond.length; i++) {
 				var data = respond[i];
-				var now  = Date.now();
-				var diff_time = Math.floor(now - ((data.time) * 1000));
+				if (exists.indexOf(data.id) != -1) continue;
+				var timeInMessage = data.time * 1000;
+				var diff_time = (timeNow - timeInMessage);
 				if(diff_time <= 3600000) {
-					var new_date = new Date(diff_time);
-					var res = [new_date.getHours(), new_date.getMinutes(), new_date.getSeconds()].map(function (x) {
+					var newDate = new Date(timeInMessage);
+					var res = [newDate.getHours(), newDate.getMinutes(), newDate.getSeconds()].map(function (x) {
 						return x < 10 ? "0" + x : x;
 					}).join(":");
 					var rowClone = $('.mess_hide').clone().removeClass('mess_hide');
 					$('#messages').append(rowClone);
 					$('.time', rowClone).html(res);
 					$('.name', rowClone).html(data.user);
-					$('.message', rowClone).html(data.message);
-					$('.scroller').scrollTop($('#messages').height()); 
+					$('.message', rowClone).html(smile(data.message));
+					$('.scroller').scrollTop($('#messages').height());
+					exists.push(data.id);
+					console.log(exists);
 				}
-			}		
-		setTimeout(tick, 3600000);
-	}, 1);
+			}
+			setTimeout(tick, 5000);
+		}, 1);
 	}
 	$('#easyForm').submit(function(){
 		var text = $('#text').val();
@@ -41,12 +55,15 @@ $(document).ready(function(){
 				$('#messages').append($('.mess_hide').clone().addClass('mess_tmp').removeClass('mess_hide'));
 				$('.mess_tmp>.time').html(res);
 				$('.mess_tmp>.name').html(arr.user);
-				$('.mess_tmp>.message').html(arr.message);
+				$('.mess_tmp>.message').html(smile(arr.message));
 				$('.mess_tmp').removeClass('mess_tmp');
 				$('.scroller').scrollTop($('#messages').height());
 				$('#text').val('');
 			}
 		});
 		return	false;
+	});
+	$('.logout').click(function(){
+		document.location = 'register.html';
 	});
 });
