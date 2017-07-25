@@ -11,7 +11,7 @@ $(document).ready(function(){
 		return string_with_replaced_smile_and_sad;
 	}
 	var exists = [];
-	$.getJSON('data/messages.json', callback);
+	$.getJSON('data../messages.json', callback);
 
 	function callback(respond) {
 		var timeNow = Date.now();
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				exists.push(data.id);
 			}
 		}
-	setTimeout(function(){$.getJSON('data/messages.json', callback);}, 5000);
+		setTimeout(function() {$.getJSON('data../messages.json', callback);}, 1000);
 	}
 	$('#easyForm').submit(function(){
 		var text = $('#text').val();
@@ -52,24 +52,8 @@ $(document).ready(function(){
 			data : {
 				message:text
 			},
-			success: function(arr) {
-				arr = $.parseJSON(arr);
-
-				var time = (arr.time);
-				var date = new Date(+time * 1000);
-				var d = new Date(date);
-
-				var res = [d.getHours(), d.getMinutes(), d.getSeconds()].map(function (x) {
-					return x < 10 ? "0" + x : x;
-				}).join(":");
-
-				$('#messages').append($('.mess_hide').clone().addClass('mess_tmp').removeClass('mess_hide'));
-				$('.mess_tmp>.time').html(res);
-				$('.mess_tmp>.name').html(arr.user);
-				$('.mess_tmp>.message').html(smile(arr.message));
-				$('.mess_tmp').removeClass('mess_tmp');
-				$('.scroller').scrollTop($('#messages').height());
-
+			success: function() {
+				$.getJSON('data../messages.json', callback);
 				$('#text').val('');
 			}
 		});
