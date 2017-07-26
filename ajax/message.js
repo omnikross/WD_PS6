@@ -11,7 +11,7 @@ $(document).ready(function(){
 		return string_with_replaced_smile_and_sad;
 	}
 	var exists = [];
-	$.getJSON('data../messages.json', callback);
+	$.getJSON('data/messages.json', callback);
 
 	function callback(respond) {
 		var timeNow = Date.now();
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				exists.push(data.id);
 			}
 		}
-		setTimeout(function() {$.getJSON('data../messages.json', callback);}, 1000);
+		setTimeout(function() {$.getJSON('data/messages.json', callback);}, 1000);
 	}
 	$('#easyForm').submit(function(){
 		var text = $('#text').val();
@@ -53,7 +53,7 @@ $(document).ready(function(){
 				message:text
 			},
 			success: function() {
-				$.getJSON('data../messages.json', callback);
+				$.getJSON('data/messages.json', callback);
 				$('#text').val('');
 			}
 		});
