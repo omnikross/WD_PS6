@@ -1,4 +1,5 @@
 <?php
+include('../connection/db.php');
 session_start();
 $name     = $_POST['user'];
 $password = $_POST['pass'];
@@ -9,26 +10,24 @@ if (!isset($name, $password) || empty($name) || empty($password)){
 	http_response_code(400);
 	die();
 }
-$file = "../data/users.json";
+$count = mysqli_query($connection, "SELECT `name` FROM  `users` WHERE(`name` = '$name')");
+$nameAndPass = mysqli_query($connection, "SELECT * FROM  `users` WHERE(`name` = '$name' AND `password` = '$password')");
 
-$json_array= json_decode(file_get_contents($file), true);
-
-$users = array(); 
-
-if (is_array($json_array)) {
-	$users = $json_array;
-}
-$newUser = true;
-foreach($users as $user) {
-	if ($user["name"] == $name) {
-		$newUser = false;
-		if ($user["pass"] !== $password) {
-			http_response_code(400);
-		} 
+if (mysqli_num_rows($count) == 0)
+{
+	mysqli_query($connection, "INSERT INTO `users` (`name`, `password`) VALUES ('$name', '$password')");
+} else 
+{
+	if(mysqli_num_rows($nameAndPass) == 1)
+	{
+		return true;
+	}
+	if(mysqli_num_rows($nameAndPass) == 0) 
+	{
+		http_response_code(400);
+		die();
 	}
 }
-if ($newUser) {
-	$users[] = array("name" => $name, "pass" => $password, "id" => count($users) + 1);
-}
-file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
+
+mysqli_close($connection); 
 ?>
